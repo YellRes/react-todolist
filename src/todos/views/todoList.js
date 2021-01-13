@@ -1,6 +1,6 @@
 import React from 'react'
 import TodoItem from './todoItem'
-import {TOGGLE_TODO, REMOVE_TODO} from '../actions'
+import {toggleTodo, removeTodo} from '../actions'
 import {FilterTypes} from '../../constants'
 import { connect } from 'react-redux'
 
@@ -44,10 +44,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onToggleTodo: id => {
-            dispatch(TOGGLE_TODO(id))
+            dispatch(toggleTodo(id))
         },
         onRemoveTodo: id => {
-            dispatch(REMOVE_TODO(id))
+            dispatch(removeTodo(id))
         }
     }
 }

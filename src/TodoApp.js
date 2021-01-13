@@ -1,7 +1,7 @@
 
 import React from 'react'
-import {view as Todos} from './todos/'
-import {view as Filter} from './filter/'
+import {view as Todos} from './todos'
+import {view as Filter} from './filter'
 
 function TodoApp() {
     return (
@@ -12,4 +12,4 @@ function TodoApp() {
     )
 }
 
-export default Todo
+export default TodoApp

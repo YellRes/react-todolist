@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 
 import {addTodo} from '../actions'
 
-class addTodo extends Component {
+class addTodoCom extends Component {
     constructor() {
-
+        super()
     }
 
     refInput = (node) => {
@@ -46,4 +46,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(addTodo)
+export default connect(null, mapDispatchToProps)(addTodoCom)

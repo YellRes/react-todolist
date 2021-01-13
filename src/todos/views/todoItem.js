@@ -1,10 +1,10 @@
 import React from 'react'
 
-const TodoItem = ({onToggle, onRemove, complete, text}) => (
+const TodoItem = ({onToggle, onRemove, completed, text}) => (
     <li
         className="todo-item"
         style={{
-            textDecoration: complete ? 'line-through' : 'none'
+            textDecoration: completed ? 'line-through' : 'none'
         }}
     >
 

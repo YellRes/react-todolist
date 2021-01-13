@@ -17,7 +17,6 @@ const link = ({active, children, onClick}) => {
     }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
     return {
         active: state.filter === ownProps.filter
@@ -25,9 +24,13 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    onClick: () => {
-        dispatch(setFilter(ownProps.filter))
+    return {
+        onClick: () => {
+            dispatch(setFilter(ownProps.filter))
+        }
     }
+
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Link)
+export default connect(mapStateToProps, mapDispatchToProps)(link)
+
