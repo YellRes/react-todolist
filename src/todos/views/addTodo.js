@@ -1,49 +1,52 @@
 import React, {Component} from 'react'
+import {add_Todo} from '../actions'
 import {connect} from 'react-redux'
 
-import {addTodo} from '../actions'
+class addTodo extends Component {
 
-class addTodoCom extends Component {
     constructor() {
-        super()
+        super(...arguments)
     }
 
-    refInput = (node) => {
+    inputRef = (node) => {
         this.input = node
     }
 
-    onSubmit = (ev) => {
-        ev.preventDefault()    
-
+    onSubmit = () => {
         const input = this.input
-        if (!input.value.trim()) {
-            return
-        }
+        if (!input.value.trim()) return 
 
         this.props.onAdd(input.value)
+        
         input.value = ''
     }
 
-    render() {
+    render () {
         return (
-            <div className="add-todo">
-                <form onSubmit={this.onSubmit}>
-                    <input className="new-todo" ref={this.refInput}/>
-                    <button className="add-btn" type="submit">
-                        添加
-                    </button>
-                </form>    
-            </div>
+            <>
+                <input ref={this.inputRef}></input>
+                
+                <button onClick={this.onSubmit}>
+                    添加
+                </button>
+            </>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd: (text) => {
-            dispatch(addTodo(text))
+        onAdd: (value) => {
+            
+            dispatch(add_Todo(value))
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(addTodoCom)
+export default connect(mapStateToProps, mapDispatchToProps)(addTodo)

@@ -2,9 +2,9 @@ import {ADD_TODO, TOGGLE_TODO, REMOVE_TODO} from './actionTypes'
 
 let nextTodoId = 0
 
-export const addTodo = (text) => ({
+export const add_Todo = (text) => ({
     type: ADD_TODO,
-    complete: false,
+    completed: false,
     id: nextTodoId++,
     text
 })

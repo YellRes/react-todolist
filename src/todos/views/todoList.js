@@ -1,35 +1,30 @@
 import React from 'react'
-import TodoItem from './todoItem'
+import {connect} from 'react-redux'
 import {toggleTodo, removeTodo} from '../actions'
-import {FilterTypes} from '../../constants'
-import { connect } from 'react-redux'
-
-const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
+import TodoItem from './todoItem'
+ 
+const todoList = ({todoArr, onToggle, onRemove}) => {
     return (
-        <ul className="todo-list">
-            {
-                todos.map(item => (
-                    <TodoItem
-                        key={item.id}
-                        text={item.text}
-                        completed={item.completed}
-                        onToggle={() => onToggleTodo(item.id)}
-                        onRemve={() => onRemoveTodo(item.id)}
-                    ></TodoItem>
-                ))
-            }
-        </ul>
+        todoArr.map(item => (
+            <TodoItem
+                key={item.id}
+                text={item.text}
+                completed={item.completed}
+                onToggle={() => onToggle(item.id)}
+                onRemove={() => onRemove(item.id)}
+            />
+        ))
     )
 }
 
-const selectVisibleTodos = (todos, filter) => {
-    switch (filter) {
-        case FilterTypes.ALL:
-            return todos
-        case FilterTypes.COMPLETED:
-            return todos.filter(item => item.completed)
-        case FilterTypes.UNCOMPLETED:
-            return todos.filter(item => !item.completed)
+const getState = (state, filter) => {
+    switch(filter) {
+        case 'ALL':
+            return state
+        case 'COMPLETED':
+            return state.filter(item => item.completed)
+        case 'UNCOMPLETED':
+            return state.filter(item => !item.completed)
         default: 
             throw new Error('unsupport filter')
     }
@@ -37,19 +32,19 @@ const selectVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = (state) => {
     return {
-        todos: selectVisibleTodos(state.todos, state.filter)
+        todoArr: getState(state.todos, state.filter)
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onToggleTodo: id => {
+        onToggle: (id) => {
             dispatch(toggleTodo(id))
         },
-        onRemoveTodo: id => {
+        onRemove: (id) => {
             dispatch(removeTodo(id))
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(todoList)

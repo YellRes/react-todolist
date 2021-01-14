@@ -1,22 +1,26 @@
 import React from 'react'
 
-const TodoItem = ({onToggle, onRemove, completed, text}) => (
-    <li
-        className="todo-item"
-        style={{
-            textDecoration: completed ? 'line-through' : 'none'
-        }}
-    >
+const todoItem = ({completed, text, onToggle, onRemove, id}) => {
+    const checkedProp = completed ? {check: true} : {}
+    return (
+        <li
+            style={{
+                textDecoration: completed ? 'line-through' : 'none'
+            }}>
+            <input
+                type="checkbox"
+                {...checkedProp}
+                readOnly
+                onClick={onToggle}
+            />
 
-        <input className="toggle" type="checkbox" 
-        checked={completed ? 'checked' : ''} readOnly onClick={onToggle}/>
+            <label>
+                    {text}
+            </label>
+            <button onClick={onRemove}>x</button>
+        </li>
+    )
+}
 
-        <label className="text">{text}</label>
-        <button className="remove" onClick={onRemove}>
-            x
-        </button>
 
-    </li>
-)
-
-export default TodoItem
+export default todoItem
